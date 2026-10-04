@@ -3,25 +3,39 @@
         Chat - Home
     </x-slot>
 
-    <div class="max-w-2xl mx-auto">
+    <div class="mx-auto flex w-full max-w-5xl flex-col gap-8">
 
-            <!-- Card -->
-            <div class="bg-white rounded-lg shadow-md mt-8">
+        <form method="POST" action="{{ route('chats.store') }}"
+              class="mx-auto flex w-full max-w-2xl flex-col gap-2 bg-white rounded-lg shadow-md p-6">
 
-                <div class="p-6">
+            @csrf
 
-                    <h1 class="text-3xl font-bold text-gray-900">
-                        Welcome to Chat!
-                    </h1>
+            <label for="message" class="text-sm font-medium text-gray-700">
+                Your message
+            </label>
 
-                    <p class="mt-4 text-gray-500">
-                        This is your brand new Laravel application.
-                        Time to make it sing (or chirp)!
-                    </p>
+            <textarea id="message"
+                      name="message"
+                      rows="3"
+                      maxlength="1000"
+                      required
+                      placeholder="Write something..."
+                      class="w-full rounded-md border border-gray-300 p-3 text-gray-900 focus:border-blue-500 focus:ring-blue-500">{{ old('message') }}</textarea>
 
-                </div>
+            @error('message')
+                <p class="text-sm text-red-600">
+                    {{ $message }}
+                </p>
+            @enderror
 
-            </div>
+            <button type="submit"
+                    class="self-end px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
+                Send
+            </button>
 
-        </div>
+        </form>
+
+        <x-chats :chats="$chats" class="mx-auto w-full" />
+
+    </div>
 </x-layout>
