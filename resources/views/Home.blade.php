@@ -35,7 +35,7 @@
 
         </form>
 
-        <x-chats :chats="$chats" class="mx-auto w-full" />
+        <x-Chats :chats="$chats" class="mx-auto w-full" />
 
     </div>
 </x-layout>
